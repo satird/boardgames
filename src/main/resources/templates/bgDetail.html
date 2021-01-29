@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'boardgames', ${user})}">
+
+<body>
+<div>
+    <div class="bg-detail-body">
+        <div class="bg-detail-left">
+            <div class="bg-detail-left-img">
+                <img class="bg-detail-img" th:src="${boardgame.getImage()}" alt="">
+            </div>
+        </div>
+        <div class="bg-detail-right">
+            <div class="bg-detail-rating">
+                <div class="bg-detail-rating-user">
+                    <i class="fas fa-poll-h"></i>
+                    <span th:text="#{boardgame.voted} + ${boardgame.getUsersrated()}"></span>
+                </div>
+                <div class="bg-detail-rating-bgg">
+                    <i class="fas fa-sort-numeric-down-alt"></i>
+                    <span th:text="#{boardgame.rating} + ${boardgame.getBoardGameRank()}"></span>
+                </div>
+            </div>
+            <div class="bg-detail-name-container">
+                <p class="bg-detail-title" th:text="${boardgame.getPrimaryName()}"></p>
+                <a title="Добавить в избранное" th:href="'/favorites/' + ${boardgame.getBggId()} + '/bookmark'">
+<!--                    <i th:if="${true}" class="far fa-bookmark"></i>-->
+<!--                    <i th:if="${false}" class="fas fa-bookmark"></i>-->
+                    <i th:class="${isFavorites} ? 'fa-bookmark fas' : 'fa-bookmark far'"></i>
+                </a>
+            </div>
+            <p class="bg-detail-year" th:text="#{boardgame.year} + ${boardgame.getYearPublished()}"></p>
+            <div class="bg-detail-players">
+                <p>
+                    <i class="fas fa-user"></i>
+                    <span th:utext="#{boardgame.minplayer} + ${boardgame.getMinPlayers()}"></span>
+                </p>
+                <p>
+                    <i class="fas fa-users"></i>
+                    <span th:utext="#{boardgame.maxplayer} + ${boardgame.getMaxPlayers()}"></span>
+                </p>
+            </div>
+            <div class="bg-detail-text">
+                <p class="bg-detail-text" th:with="description=${boardgame.getDescription()}" th:utext="${description}"></p>
+            </div>
+            <p>
+                <i class="far fa-clock"></i>
+                <span class="bg-detail-time" th:text="#{boardgame.gametime} + ${boardgame.getPlayingtime()} + #{boardgame.minute}"></span>
+            </p>
+        </div>
+    </div>
+    <div th:replace="~{fragments/comments :: comments}"></div>
+</div>
+</body>
+
+</html>

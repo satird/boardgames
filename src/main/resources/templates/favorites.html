@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'favorites', ${user})}">
+
+<body>
+<div class="bg-list">
+    <a th:href="'/boardgames/' + ${boardgame.getBggId()}" class="bg-item"
+       th:class="${indexBgg.count % 4 == 0}? 'odd bg-item' : 'bg-item'" th:each="boardgame,indexBgg : ${boardgames}"
+       th:if="${indexBgg.index<100} and ${indexBgg != null}">
+        <div class="bg-head">
+            <h3 class="bg-title" th:text="${boardgame.getPrimaryName()}"></h3>
+        </div>
+        <div class="bg-body">
+            <img class="bg-thumbnail" th:src="${boardgame.getThumbnail()}" alt="">
+            <p class="bg-text" th:with="description=${boardgame.getDescription()}" th:utext="${#strings.abbreviate(description,200)}"></p>
+        </div>
+    </a>
+</div>
+</body>
+
+</html>

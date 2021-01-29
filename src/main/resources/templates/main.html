@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      th:replace="~{fragments/layout :: layout (~{::body},'main', ${user})}">
+<!--<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="fragments/layout">-->
+
+<body>
+<!--<div class="testLayout" layout:fragment="content">-->
+<div class="testLayout">
+    <h1 style="font-size: 3rem; color: #EC4C4C" th:text="#{main.h1(${#httpServletRequest.remoteUser})}"></h1>
+    <p th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</p>
+    <h2 th:text="'Server name ' + ${#httpServletRequest.serverName}"></h2>
+    <h2 th:text="'User: ' + (${user != null} ? ${user.getRoles()} : ${'гость'})"></h2>
+    <p>
+        Today is: <span th:text="${#calendars.format(today,'dd MMMM yyyy')}">13 May 2011</span>
+    </p>
+    <p th:if="${#authorization.expression('isAuthenticated()')}" th:text="${#request.userPrincipal.name}"></p>
+<!--    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
+<!--    Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>-->
+</div>
+</body>
+
+</html>

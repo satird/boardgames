@@ -1,0 +1,10 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<div  class="pager-form" th:fragment="pagerForm">
+    <form method="get">
+        <input name="goToPage" type="text">
+        <input type="hidden" th:value="${filter != null} ? ${filter}" name="gameName">
+        <input type="submit">
+    </form>
+</div>
+</html>

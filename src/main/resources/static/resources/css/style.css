@@ -1,0 +1,463 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: 62.5%;
+    font-style: normal;
+    font-weight: normal;
+    background-color: #fff;
+    -webkit-animation: bugfix infinite 1s;
+    line-height: 1.2;
+}
+
+textarea,
+input,
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 62.5%;
+    font-style: normal;
+    font-weight: normal;
+    background-color: #fff;
+    -webkit-animation: bugfix infinite 1s;
+    line-height: 1.2;
+}
+input,
+textarea,
+select,
+select:active,
+select:hover,
+select:focus {
+    outline: none;
+}
+:focus {
+    outline-color: transparent;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+}
+input[type=search]{
+    -moz-appearance: none;/* older firefox */
+    -webkit-appearance: none; /* safari, chrome, edge and ie mobile */
+    appearance: none; /* rest */
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+.block {
+    display: block;
+}
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 1;
+    visibility: visible;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 49;
+    display: none;
+}
+.noscroll {
+    overflow: hidden !important;
+    height: 100% !important;
+}
+
+.container {
+    width: 143rem;
+    margin: 0 auto;
+    position: relative;
+}
+.red-btn {
+    height: 6rem;
+    background-color: #ee7474;
+    color: #fff;
+    border-radius: 0.3rem;
+    font-size: 2.4rem;
+    transition: 0.2s;
+    display: inline-block;
+    line-height: 6rem;
+}
+main {
+    font-size: 1.6rem;
+}
+input,
+textarea {
+    font-size: 1.8rem;
+}
+section {
+    padding: 10rem 0;
+}
+.fix-header {
+    width: 100%;
+    height: 12rem;
+}
+
+
+/*=================header=================*/
+.header {
+    position: fixed;
+    z-index: 48;
+    width: 100%;
+    background-color: #fff;
+}
+.header-wrapper {
+    min-height: 12rem;
+    display: flex;
+    align-items: center;
+}
+.header-logo {
+    flex: 0 0 auto;
+    width: 28rem;
+    height: 4rem;
+}
+.header-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.header-list {
+    flex: 1 1 auto;
+    display: flex;
+    padding: 0 10rem;
+}
+.header-btn {
+    padding: 0 3rem;
+    border: 1px solid #ee7474;
+}
+.header-btn:hover {
+    background-color: inherit;
+    color:  #ee7474;
+}
+.header-item-link {
+    font-family: 'Gotham Pro';
+    display: inline-block;
+    font-size: 1.8rem;
+    padding: 1rem 2.5rem;
+}
+/*=================end header=================*/
+
+main {
+    font-size: 1.6rem;
+}
+input,
+textarea {
+    font-size: 1.8rem;
+}
+section {
+    padding: 10rem 0;
+}
+.fix-header {
+    width: 100%;
+    height: 12rem;
+}
+
+/*=================footer=================*/
+.footer {
+    padding: 7.5rem 0 8rem;
+    background-color: #f6f6f6;
+}
+.footer-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.footer-logo {
+    width: 36rem;
+    height: 5rem;
+    margin-bottom: 1.5rem;
+}
+.footer-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left;
+}
+.footer-caption {
+    font-size: 1.3rem;
+    color: #4c4c4c;
+    display: block;
+}
+.footer-caption-link {
+    text-decoration: underline;
+}
+.footer-list {
+    display: flex;
+    margin-bottom: 2rem;
+}
+.footer-item-link {
+    font-family: 'Gotham Pro';
+    display: inline-block;
+    font-size: 1.8rem;
+    padding: 1rem 2.5rem;
+}
+.footer-phoneNumber {
+    font-size: 3rem;
+    padding: 0 2.5rem;
+}
+/*=================end footer=================*/
+
+/*=================modal=================*/
+.modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: #b7eced;
+    padding: 10rem 0 11rem;
+    overflow: auto;
+    transition: 0.3s;
+}
+.mini-modal.modal {
+    width: 70rem;
+    height: 30rem;
+    max-width: 90%;
+    border-radius: 0.4rem;
+}
+.modal-content::-webkit-scrollbar {
+    display: none;
+}
+.close-modal {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 5.4rem;
+    height: 5.4rem;
+    background-color: #fff;
+    border: 1px solid #0098bd;
+    border-radius: 50%;
+    z-index: 51;
+    transition: 0.6s;
+}
+.close-modal::before,
+.close-modal::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 4rem;
+    top: 50%;
+    left: 50%;
+    background-color: #0098bd;
+}
+.close-modal::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.close-modal::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+.close-modal:hover {
+    transform: rotate(180deg);
+}
+.mini-modal .close-modal {
+    right: 2rem;
+    top: 2rem;
+}
+.modal-content {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    width: 47rem;
+    display: none;
+    background-color: #b7eced;
+    transition: 0.3s;
+}
+.modal-content .close-modal {
+    right: -2.7rem;
+    top: -2.7rem;
+}
+/*=================end modal=================*/
+
+
+
+
+
+/*=================tablets, mobile and other=================*/
+@media (max-width: 108em) {
+    html {
+        font-size: 56.25%;
+    }
+}
+
+@media (max-width: 105em) {
+    html {
+        font-size: 54.6875%;
+    }
+}
+
+@media (max-width: 96em) {
+    html {
+        font-size: 50%;
+    }
+}
+
+@media (max-width: 90em) {
+    html {
+        font-size: 46.875%;
+    }
+}
+
+@media (max-width: 80em) {
+    html {
+        font-size: 41.667%;
+    }
+}
+
+@media (max-width: 64em) {
+    html {
+        font-size: 33.333%;
+    }
+    .triple-list-col {
+        width: 33.333%;
+    }
+}
+
+
+@media (max-width: 48em) {
+
+    html {
+        font-size: 5px;
+        -webkit-text-size-adjust: none;
+    }
+
+    body {
+        -webkit-text-size-adjust: none;
+    }
+    .container {
+        width: 90%;
+    }
+    .mobile {
+        display: block;
+    }
+    .desktop {
+        display: none;
+    }
+    main {
+        font-size: 2.4rem;
+    }
+    input,
+    textarea {
+        font-size: 2.8rem;
+    }
+    /*гамбургер*/
+    .bar1, .bar2, .bar3 {
+        width: 6.2rem;
+        height: 0.3rem;
+        background-color: #333;
+        margin: 1.5rem 0;
+        transition: 0.4s;
+        /*чтобы не съезжало в сторону*/
+        -webkit-transform-origin: left center;
+        -moz-transform-origin: left center;
+        -o-transform-origin: left center;
+        transform-origin: left center;
+    }
+    .active .bar1 {
+        -webkit-transform: rotate(-45deg) translate(-0.4rem);
+        transform: rotate(45deg) translate(-0.4rem);
+    }
+    .active .bar2 {opacity: 0;}
+    .active .bar3 {
+        -webkit-transform: rotate(45deg) translate(-0.4rem);
+        transform: rotate(-45deg) translate(-0.4rem);
+    }
+    .header-list {
+        position: absolute;
+        right: 0;
+        transition: 0.3s;
+        top: 12rem;
+        background-color: #fff;
+        transform: translateY(-300%);
+    }
+    .active.header-list {
+        transform: translateX(0);
+    }
+    .header-list {
+        flex-direction: column;
+        padding: 3rem;
+        padding-right: 7rem;
+        width: 115%;
+        left: -6%;
+    }
+    .header-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+    .header-logo {
+        width: 42rem;
+        height: 6rem;
+    }
+    .header-item-link {
+        font-size: 3rem;
+        padding: 2rem 0;
+    }
+    .red-btn {
+        height: 9rem;
+        border-radius: 0.6rem;
+        font-size: 3rem;
+        line-height: 9rem;
+        padding: 0 4.5rem;
+    }
+    .header-btn {
+        padding: 0 4.5rem;
+    }
+    .footer-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+    .footer-logo {
+        width: 100%;
+        height: 8rem;
+        margin-bottom: 3rem;
+    }
+    .footer-list {
+        flex-direction: column;
+    }
+    .footer-item-link {
+        font-size: 2.8rem;
+    }
+    .footer-phoneNumber {
+        font-size: 4.5rem;
+        padding: 0 2.5rem;
+    }
+    .footer {
+        padding-bottom: 16rem;
+    }
+    .footer-caption-wrapper {
+        position: absolute;
+        bottom: -8rem;
+        width: 90%;
+    }
+    .footer-caption {
+        font-size: 1.8rem;
+    }
+    .modal-content {
+        width: 80%;
+    }
+    .modal-stories-btn.btn-arrow-right {
+        right: -4.5rem;
+    }
+    .modal-stories-btn.btn-arrow-left {
+        left: -4.5rem;
+    }
+}
+
+
+@media (max-width: 21em) {
+    html {
+        font-size: 4px;
+        -webkit-text-size-adjust: none;
+    }
+
+}
+
+/*=================tablets, mobile and other=================*/

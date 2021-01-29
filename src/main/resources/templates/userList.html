@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'users', ${user})}">
+
+<body>
+<p>Список пользователей</p>
+<table>
+    <thead>
+        <tr>
+            <td>№</td>
+            <td>Имя пользователя</td>
+            <td>Роль</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="userItem : ${users}">
+            <td th:text="${userItemStat.count}"></td>
+            <td th:text="${userItem.getUsername()}"></td>
+            <td th:each="role : ${userItem.getRoles()}" th:text="${roleStat.last} ? ${role} : ${role} + ', '"></td>
+            <td>
+                <a th:href="'/user/' + ${userItem.getId()}">Изменить</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+
+</html>

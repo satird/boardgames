@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<div th:fragment="login (method, path)">
+    <form th:action="@{${path}}" th:method="${method}">
+        <div>
+            <label th:inline="text">[[#{login.username}]]
+                <input th:class="${usernameError != null} ? 'is-invalid'" th:value="${user} ? ${user.username}" type="text" name="username"/>
+            </label>
+            <p class="invalid-feedback" th:if="${usernameError != null}" th:text="${usernameError}"></p>
+        </div>
+        <div>
+            <label th:inline="text">[[#{login.password}]]
+                <input th:class="${passwordError != null} ? 'is-invalid'" type="password" name="password"/>
+            </label>
+            <p class="invalid-feedback" th:if="${passwordError != null}" th:text="${passwordError}"></p>
+        </div>
+        <div th:if="${path == '/registration'}">
+            <label th:inline="text">[[#{login.password2}]]
+                <input th:class="${password2Error} ? 'is-invalid'" type="password" name="password2"/>
+            </label>
+            <p class="invalid-feedback" th:if="${password2Error}" th:text="#{validation.passwordError}"></p>
+        </div>
+        <div th:if="${path == '/registration'}">
+            <label th:inline="text">[[#{login.email}]]
+                <input th:class="${emailError != null} ? 'is-invalid'" th:value="${user} ? ${user.email}" type="email" name="email"/>
+            </label>
+            <p class="invalid-feedback" th:if="${emailError != null}" th:text="${emailError}"></p>
+        </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <div><input type="submit" th:value="${path == '/registration'} ? #{login.registration} : #{login.enter}"/></div>
+        <!--        <p>Войти через <a href="/login/google"><span class="fab fa-google"></span> Google</a></p>-->
+        <div>
+            Войти через Google: <a th:href="@{/oauth2/authorization/google}">click here</a>
+        </div>
+        <div>
+            Войти через Facebook: <a th:href="@{/oauth2/authorization/facebook}">click here</a>
+        </div>
+    </form>
+</div>
+
+</html>

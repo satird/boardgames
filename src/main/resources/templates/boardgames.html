@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'boardgames', ${user})}">
+
+<body>
+<form method="get">
+    <input type="text" name="gameName" th:placeholder="#{boardgames.search}" th:value="${filter}">
+    <button th:text="#{boardgames.search}" type="submit">Найти</button>
+</form>
+<div th:replace="~{fragments/pager :: pager (~{::.bg-list})}"></div>
+<div th:replace="~{fragments/pager-form :: pagerForm}"></div>
+    <div class="bg-list">
+        <a th:href="'/boardgames/' + ${boardgame.getBggId()}" class="bg-item"
+           th:class="${indexBgg.count % 4 == 0}? 'odd bg-item' : 'bg-item'" th:each="boardgame,indexBgg : ${page}">
+            <div class="bg-head">
+                <h3 class="bg-title" th:text="${boardgame.getPrimaryName()}"></h3>
+            </div>
+            <div class="bg-body">
+                <img class="bg-thumbnail" th:src="${boardgame.getThumbnail()}" alt="">
+                <p class="bg-text" th:with="description=${boardgame.getDescription()}" th:utext="${#strings.abbreviate(description,200)}"></p>
+            </div>
+        </a>
+    </div>
+<div th:replace="~{fragments/pager :: pager (~{::.bg-list})}"></div>
+</body>
+
+</html>

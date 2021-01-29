@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'messages', ${user})}">
+
+<body>
+<div>
+    <form action="" method="post">
+        <input type="text" name="text" placeholder="Введите сообщение">
+        <input type="text" name="tag" placeholder="Тэг">
+        <input type="hidden"
+                th:name="${_csrf.parameterName}"
+                th:value="${_csrf.token}"/>
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+<div th:each="message : ${messages}">
+    <b th:text="${message.getId()}"></b>
+    <span th:text="${message.getText()}"></span>
+    <i th:text="${message.getTag()}"></i>
+    <strong th:text="${message.getAuthorName()}"></strong>
+</div>
+</body>
+
+</html>

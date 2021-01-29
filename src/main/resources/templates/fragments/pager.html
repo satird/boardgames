@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<div th:fragment="pager (pagination)">
+        <ul class="pagination">
+            <th:block th:each="pageNumber : ${body}">
+                <li th:if="${pageNumberStat.first}" class="page-item">
+                    <a class="page-link" th:href="${url} + 'page='+ ${page.getNumber()} + '&size=' + ${page.getSize()}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item active" th:if="${pageNumber} == ${page.getNumber()+1}">
+                    <a class="page-link" th:text="${pageNumber}" href="#"></a>
+                </li>
+                <li class="page-item disabled" th:if="${pageNumber} == -1">
+                    <a class="page-link" href="#">...</a>
+                </li>
+                <li class="page-item" th:if="${pageNumber} != -1 and ${pageNumber} != ${page.getNumber()+1}">
+                    <a class="page-link" th:text="${pageNumber}" th:href="${url} + 'page='+ ${pageNumber} + '&size=' + ${page.getSize()}"></a>
+                </li>
+                <li th:if="${pageNumberStat.last}" class="page-item"  aria-label="Next">
+                    <a class="page-link" th:href="${url} + 'page='+ ${page.getNumber() + 2} + '&size=' + ${page.getSize()}">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </th:block>
+        </ul>
+</div>
+
+</html>

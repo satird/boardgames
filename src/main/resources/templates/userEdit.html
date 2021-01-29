@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'users', ${user})}">
+
+<body>
+<p>Изменить роль пользователя</p>
+<form action="/user" method="post">
+    <input type="text" name="username" th:value="${user.username}">
+    <div>
+        <label th:each="role : ${roles}">
+            <span th:text="${role}"></span>
+            <input type="checkbox" th:name="${role}" th:attr="checked = ${user.roles.contains(role)}? 'true' : 'false'">
+        </label>
+    </div>
+    <input type="hidden" name="userId" th:value="${user.getId()}">
+    <input name="userId" th:value="${user.getId()}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+
+</html>

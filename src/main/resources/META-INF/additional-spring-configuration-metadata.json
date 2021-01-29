@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "upload.path",
+      "type": "java.lang.String",
+      "description": "Description for upload.path."
+    },
+    {
+      "name": "delete.path",
+      "type": "java.lang.String",
+      "description": "Description for delete.path."
+    },
+    {
+      "name": "spring.http.multipart.enabled",
+      "type": "java.lang.String",
+      "description": "Description for spring.http.multipart.enabled."
+    }
+  ] }

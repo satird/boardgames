@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'users', ${user})}">
+
+<body>
+<p>Профиль пользователя</p>
+<form action="/user/profile"  enctype="multipart/form-data" method="post">
+    <div class="comment-user-pic">
+        <!--                    <img th:src="@{/resources/images/user.png}" alt="user-icon">-->
+<!--        <img th:if="${user.getUserpic()}" th:src="@{'/img/' + ${user.userpic}}" alt="user-icon">-->
+        <img th:if="${user.getUserpic()}" th:src="${avatar}" alt="user-icon">
+    </div>
+    <p th:text="#{login.username}"><span th:text="${user.getUsername()}"></span></p>
+    <div>
+        <label th:inline="text">[[#{login.changePassword}]]
+            <input type="password" name="password"/>
+        </label>
+    </div>
+<!--    <div><label th:inline="text">[[#{login.repeatPassword}]]<input type="password" th:value="${user.getPassword()}" name="password"/> </label></div>-->
+    <div th:if="${visible}">
+        <label class="file-btn-wrapper" th:inline="text">[[#{login.changeUserpic}]]
+            <input type="file" name="userpic"/>
+            <span class="js-value input-repl-btn"><i class="fas fa-upload"></i>Загрузить файл</span>
+        </label>
+    </div>
+    <input type="hidden" name="userId" th:value="${user.getId()}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+
+</html>

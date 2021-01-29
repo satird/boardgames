@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      th:replace="~{fragments/layout :: layout (~{::body},'login', ${user})}">
+<body>
+<div th:if="${param.logout}">
+    Вы вышли из системы
+</div>
+<div th:class="'alert alert-'+ ${messageType}" role="alert" th:text="${message !=null} ? ${message}">
+
+</div>
+<!--<form th:action="@{/login}" method="post">-->
+<!--    <div><label> Имя пользователя : <input type="text" name="username"/> </label></div>-->
+<!--    <div><label> Пароль: <input type="password" name="password"/> </label></div>-->
+<!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+<!--    <div><input type="submit" value="Войти"/></div>-->
+<!--</form>-->
+<div th:if="${param.error} and ${session}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION']}" class="alert alert-danger" role="alert">
+    <p th:text="#{error.loginEmpty}">Demo Invalid input</p>
+<!--    <p th:text="${errorMsg.message}"></p>-->
+</div>
+<div th:include="fragments/login :: login ('post', '/login')"></div>
+<a href="/registration">Зарегистрироваться</a>
+</body>
+</html>
