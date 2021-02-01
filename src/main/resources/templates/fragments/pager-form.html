@@ -2,8 +2,9 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <div  class="pager-form" th:fragment="pagerForm">
     <form method="get">
-        <input name="goToPage" type="text">
+        <input name="goToPage" placeholder="Перейти на страницу" type="text">
         <input type="hidden" th:value="${filter != null} ? ${filter}" name="gameName">
+        <input type="hidden" th:value="${pageSize != null} ? ${pageSize}" name="pageSize">
         <input type="submit">
     </form>
 </div>

@@ -54,8 +54,10 @@ public class BoardGameController {
             @RequestParam(required = false, defaultValue = "") String gameName,
             @PageableDefault(sort = {"bggId"}, direction = Sort.Direction.ASC, value = 100) Pageable pageable,
             @RequestParam(required = false) String goToPage,
+            @RequestParam(required = false) Integer pageSize,
             Model model) {
         Page<Boardgame> page;
+        boolean disable = false;
         String url = "/boardgames?";
 
         if (gameName != null && !gameName.isEmpty()) {
@@ -68,8 +70,13 @@ public class BoardGameController {
             model.addAttribute("role", true);
         }
 
+        Pageable goToNumPage;
         if (goToPage != null && !goToPage.isEmpty()) {
-            Pageable goToNumPage = PageRequest.of(Integer.parseInt(goToPage)-1, 100, Sort.by("bggId").ascending());
+            if (pageSize != null) {
+                goToNumPage = PageRequest.of(Integer.parseInt(goToPage)-1, pageSize, Sort.by("bggId").ascending());
+            } else {
+                goToNumPage = PageRequest.of(Integer.parseInt(goToPage)-1, page.getSize(), Sort.by("bggId").ascending());
+            }
             if (gameName != null && !gameName.isEmpty()) {
                 url = "/boardgames?gameName=" + gameName + "&";
                 page = boardgameService.findByPrimaryNameIgnoreCaseContaining(gameName, goToNumPage);
@@ -78,28 +85,12 @@ public class BoardGameController {
             }
         }
 
-        int[] body;
-        if (page.getTotalPages() > 7) {
-            int totalPages = page.getTotalPages();
-            int pageNumber = page.getNumber()+1;
-            int[] head = (pageNumber > 4) ? new int[]{1, -1} : new int[]{1,2,3};
-            int[] bodyBefore = (pageNumber > 4 && pageNumber < totalPages - 1) ? new int[]{pageNumber-2, pageNumber-1} : new int[]{};
-            int[] bodyCenter = (pageNumber > 3 && pageNumber < totalPages - 2) ? new int[]{pageNumber} : new int[]{};
-            int[] bodyAfter = (pageNumber > 2 && pageNumber < totalPages - 3) ? new int[]{pageNumber+1, pageNumber+2} : new int[]{};
-            int[] tail = (pageNumber < totalPages - 3) ? new int[]{-1, totalPages} : new int[] {totalPages-2, totalPages-1, totalPages};
-            body = ControllerUtils.merge(head, bodyBefore, bodyCenter, bodyAfter, tail);
-
-        } else {
-            body = new int[page.getTotalPages()];
-            for (int i = 0; i < page.getTotalPages(); i++) {
-                body[i] = 1+i;
-            }
-        }
-
+        int[] body = ControllerUtils.pagination(page);
         model.addAttribute("body", body);
         model.addAttribute("page", page);
         model.addAttribute("filter", gameName);
         model.addAttribute("url", url);
+        model.addAttribute("pageSize", pageable.getPageSize());
         return "boardgames";
     }
 

@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<div th:fragment="pagerSize">
+    <form method="get">
+        <div class="js-filter-item select-form" >
+            <input class="page-size" type="hidden" name="pageSize" value="">
+            <input type="hidden" th:value="${filter != null} ? ${filter}" name="gameName">
+            <a class="js-filter-handler select-field" href="javascript:void(0);" th:text="${page.getSize()}" data-id="">50</a>
+            <div class="js-filter-dd select-drop" style="display: none;">
+                <ul>
+                    <li><a th:class="${page.getSize() == 10} ? 'active'" th:href="${url} + 'page='+ ${page.getNumber()} + '&size=' + ${10}" data-id="">10</a></li>
+                    <li><a th:class="${page.getSize() == 50} ? 'active'" th:href="${url} + 'page='+ ${page.getNumber()} + '&size=' + ${50}" data-id="">50</a></li>
+                    <li><a th:class="${page.getSize() == 100} ? 'active'" th:href="${url} + 'page='+ ${page.getNumber()} + '&size=' + ${100}" data-id="">100</a></li>
+                    <li><a th:class="${page.getSize() == 200} ? 'active'" th:href="${url} + 'page='+ ${page.getNumber()} + '&size=' + ${200}" data-id="">200</a></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+</html>

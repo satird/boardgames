@@ -6,11 +6,11 @@ echo 'Copy files...'
 
 scp -i ~/.ssh/id_rsa \
     target/mediaContainer-1.0.0.jar \
-    satird@192.168.0.111:/home/satird
+    satird@192.168.1.42:/home/satird
 
 echo 'Restart server...'
 
-ssh -i ~/.ssh/id_rsa satird@192.168.0.111 << EOF
+ssh -i ~/.ssh/id_rsa satird@192.168.1.42 << EOF
 pgrep java | xargs kill -9
 nohup java -jar mediaContainer-1.0.0.jar > log.txt &
 EOF

@@ -309,10 +309,46 @@ input:not([type="checkbox"]).is-invalid {
     border-bottom-right-radius: .25rem;
 }
 /*pagination*/
-
-
-
-
+.select-form {
+    position: relative;
+    z-index: 1;
+}
+.select-field {
+    border-radius: 0.3rem;
+    border: 1px solid #8DCAFF;
+    margin: 2rem 2rem 2rem 0;
+    padding: 1.5rem;
+    width: 7rem;
+    display: block;
+    text-align: center;
+}
+.select-drop {
+    position: absolute;
+    top: 5.5rem;
+    left: 0;
+    width: 7rem;
+    border: 1px solid #8DCAFF;
+    text-align: center;
+    z-index: 2;
+    background-color: #ffffff;
+}
+.select-drop a {
+    border-bottom: 1px solid #8DCAFF;
+    display: block;
+    padding: 1rem;
+}
+.select-drop a.active {
+    background-color: #f8d7da;
+}
+.select-drop li:last-child a {
+    border-bottom: initial;
+}
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
 
 
 

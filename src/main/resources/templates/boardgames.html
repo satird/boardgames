@@ -8,6 +8,7 @@
 </form>
 <div th:replace="~{fragments/pager :: pager (~{::.bg-list})}"></div>
 <div th:replace="~{fragments/pager-form :: pagerForm}"></div>
+<p>Количество игр на странице</p><div th:replace="~{fragments/pager-size :: pagerSize}"></div>
     <div class="bg-list">
         <a th:href="'/boardgames/' + ${boardgame.getBggId()}" class="bg-item"
            th:class="${indexBgg.count % 4 == 0}? 'odd bg-item' : 'bg-item'" th:each="boardgame,indexBgg : ${page}">
