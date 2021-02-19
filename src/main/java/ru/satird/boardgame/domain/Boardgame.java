@@ -11,6 +11,7 @@ public class Boardgame {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long bggId;
+    private String alternate;
     private String primaryName;
     private String thumbnail;
     private String image;
@@ -90,4 +91,8 @@ public class Boardgame {
 //    public void setUser(User user) {
 //        this.user = user;
 //    }
+
+    public String getAlternate() {
+        return alternate;
+    }
 }

@@ -16,6 +16,9 @@ public class BoardgameService {
     public Page<Boardgame> findByPrimaryNameIgnoreCaseContaining(String gameName, Pageable pageable) {
         return boardgameRepository.findByPrimaryNameIgnoreCaseContaining(gameName, pageable);
     }
+    public Page<Boardgame> findByAlternateIgnoreCaseContaining(String gameName, Pageable pageable) {
+        return boardgameRepository.findByAlternateIgnoreCaseContaining(gameName, pageable);
+    }
 
     public Page<Boardgame> findAll(Pageable pageable) {
         return boardgameRepository.findAll(pageable);

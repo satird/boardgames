@@ -1,5 +1,2 @@
-<<<<<<< HEAD
-# boardgames
-=======
-# mediaContainer
->>>>>>> initial commit
+#Портфолио
+Работа для резюме

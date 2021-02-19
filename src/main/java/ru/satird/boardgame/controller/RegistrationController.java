@@ -24,26 +24,11 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-//    @ModelAttribute("user")
-//    public User userInfo() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userService.findByUsername(authentication.getName()) ;
-//        if( user != null) {
-//            return user;
-//        } else {
-//            return null;
-//        }
-//    }
-
-
     @GetMapping("/registration")
     public String registration(
             Model model
     )
     {
-//        if (userInfo() != null && userInfo().isAdmin()) {
-//            model.addAttribute("role", true);
-//        }
         return "registration";
     }
 
@@ -85,10 +70,6 @@ public class RegistrationController {
             @PathVariable String code
     ) {
         boolean isActivated = userService.activateUser(code);
-
-//        if (userInfo() != null && userInfo().isAdmin()) {
-//            model.addAttribute("role", true);
-//        }
 
         if (isActivated) {
             model.addAttribute("messageType", "success");

@@ -55,17 +55,11 @@
                 <li th:replace="::menuItem ('/favorites','favorites','favorites',#{layout.nav.favorite})" class="header-item">
                     <a class="header-item-link">Избранное</a>
                 </li>
-<!--                <li sec:authorize="hasAuthority('ADMIN')" th:if="${#authorization.expression('isAuthenticated()')}" th:insert="::menuItem ('/user','users','users',#{layout.nav.users})" class="header-item">-->
-<!--                    <a class="header-item-link">Пользователи</a>-->
-<!--                </li>-->
-<!--                <li   th:text="${#request.getUserPrincipal()}" th:if="${#authorization.expression('isAuthenticated()')}" th:insert="::menuItem ('/user','users','users',#{layout.nav.users})" class="header-item">-->
-<!--                    <a class="header-item-link">Пользователи</a>-->
-<!--                </li>-->
-<!--                <li  th:if="${user != null} and ${#strings.contains(user.getRoles(), 'ADMIN')}" th:insert="::menuItem ('/user','users','users',#{layout.nav.users})" class="header-item">-->
-<!--                    <a class="header-item-link">Пользователи</a>-->
-<!--                </li>-->
                 <li  th:if="${role}" th:insert="::menuItem ('/user','users','users',#{layout.nav.users})" class="header-item">
                     <a class="header-item-link">Пользователи</a>
+                </li>
+                <li class="header-item">
+                    <a th:href="@{#sendMessageModal}" class="header-item-link open-modal">Написать</a>
                 </li>
             </ul>
 <!--            <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>-->
@@ -138,6 +132,7 @@
         </div>
     </div>
 </footer>
+<div th:replace="~{fragments/modal :: modal}"></div>
 <script th:src="@{/resources/js/jquery.min.js}"></script>
 <script th:src="@{/resources/js/script.js}"></script>
 

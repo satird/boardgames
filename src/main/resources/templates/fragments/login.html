@@ -4,25 +4,25 @@
     <form th:action="@{${path}}" th:method="${method}">
         <div>
             <label th:inline="text">[[#{login.username}]]
-                <input th:class="${usernameError != null} ? 'is-invalid'" th:value="${user} ? ${user.username}" type="text" name="username"/>
+                <input th:class="${usernameError != null} ? 'is-invalid'" th:value="${user} ? ${user.username}" type="text" name="username" required/>
             </label>
             <p class="invalid-feedback" th:if="${usernameError != null}" th:text="${usernameError}"></p>
         </div>
         <div>
             <label th:inline="text">[[#{login.password}]]
-                <input th:class="${passwordError != null} ? 'is-invalid'" type="password" name="password"/>
+                <input th:class="${passwordError != null} ? 'is-invalid'" type="password" name="password" required/>
             </label>
             <p class="invalid-feedback" th:if="${passwordError != null}" th:text="${passwordError}"></p>
         </div>
         <div th:if="${path == '/registration'}">
             <label th:inline="text">[[#{login.password2}]]
-                <input th:class="${password2Error} ? 'is-invalid'" type="password" name="password2"/>
+                <input th:class="${password2Error} ? 'is-invalid'" type="password" name="password2" required/>
             </label>
             <p class="invalid-feedback" th:if="${password2Error}" th:text="#{validation.passwordError}"></p>
         </div>
         <div th:if="${path == '/registration'}">
             <label th:inline="text">[[#{login.email}]]
-                <input th:class="${emailError != null} ? 'is-invalid'" th:value="${user} ? ${user.email}" type="email" name="email"/>
+                <input th:class="${emailError != null} ? 'is-invalid'" th:value="${user} ? ${user.email}" type="email" name="email" required/>
             </label>
             <p class="invalid-feedback" th:if="${emailError != null}" th:text="${emailError}"></p>
         </div>

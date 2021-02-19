@@ -33,7 +33,7 @@ $('.js-filter-dd a').click(function () {
     console.log($(this).closest('.js-filter-item').find('input').val());
 });
 
-// я так понимаю для активации формы, времменно комментирую
+// активации формы
 $('.filter-form .js-filter-dd a').click(function () {
     $('.filter-form').submit();
 });
@@ -42,3 +42,48 @@ $('body').on('click', function (e) {
         $('.js-filter-dd').slideUp(300);
     }
 });
+//Удаляем из url hash вызова модального окна, при закрытие
+function removeHash () {
+    history.pushState("", document.title, window.location.pathname
+        + window.location.search);
+}
+//open modal
+//////////////////////
+$('.open-modal').click(function(event) {
+    var id = $(this).attr('href');
+    $('.modal').hide();
+    $('.modal').removeClass('active');
+    $('.overlay').fadeIn(200);
+    $(id).show();
+    $(id).addClass('active');
+    $('html, header').width($('html, header').width());
+    $('html').css('overflow', 'hidden');
+});
+// Закрыть модальные
+$('.btn-close-modal, .overlay, .close-modal, .close').click(function() {
+    $('.modal').hide();
+    $('.modal').removeClass('active');
+    $('.modal-content').hide();
+    $('.btn-arrow-modal').fadeOut(200);
+    $('.overlay').fadeOut(200);
+    $('html').removeAttr('style');
+    removeHash ();
+});
+
+
+// Передача id сообщения в модальное окно
+$('.comment-head-right .comment-head_delete').on('click', function () {
+    var idComment = $(this).parent().find('.idComment').val();
+    $('#deleteModal .commentId').val(idComment);
+})
+$('.comment-head-right .comment-head_edit').on('click', function () {
+    var id = $(this).parent().find('.idComment').val();
+    $.ajax({
+        type: 'GET',
+        url: '/api/comments/find/' + id,
+        success: function (comment) {
+            $('#editModal .commentId').val(comment.id);
+            $('#editModal #editComment').val(comment.text);
+        }
+    });
+})

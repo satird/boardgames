@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final String MY_EMAIL = "satird@mail.ru";
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -45,14 +46,6 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    //    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        if (userRepository.findByUsername(username) != null) {
-//            return userRepository.findByUsername(username);
-//        } else {
-//            return null;
-//        }
-//    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -206,5 +199,17 @@ public class UserService implements UserDetailsService {
             user.setPassword(passwordEncoder.encode(password));
         }
         userRepository.save(user);
+    }
+
+    public boolean sendMessage(String sendName, String sendEmail, String sendMessage) {
+            String message = String.format(
+                    "Автор: %s \nEmail: %s \nСообщение: \n%s",
+                    sendName,
+                    sendEmail,
+                    sendMessage
+            );
+
+            mailSender.send(MY_EMAIL, "Сообщение с сайта", message);
+            return true;
     }
 }

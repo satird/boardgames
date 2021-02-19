@@ -22,6 +22,16 @@ body {
     border: 1px solid #EC4C4C;
     background-color: #EC4C4C;
 }
+.red-btn {
+    border: 1px solid #EC4C4C;
+    background-color: #EC4C4C;
+    color: #ffffff;
+}
+.blue-btn {
+    border: 1px solid #8DCAFF;
+    background-color: #8DCAFF;
+    color: #ffffff;
+}
 .header-username {
     margin-right: 1rem;
     font-weight: 300;
@@ -144,6 +154,9 @@ body {
     color: #8DCAFF;
     margin-right: 1rem;
 }
+.comments {
+    padding-top: 15rem;
+}
 .comments-title {
     font-size: 4rem;
     font-weight: 500;
@@ -155,11 +168,24 @@ body {
     width: 70%;
     margin: 4rem 0 6rem;
 }
+input:not([type='submit']).modal-input {
+    padding: 1.5rem 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 0.4rem;
+}
 .comments-textarea::placeholder {
     color: #646464;
     font-weight: 300;
 }
 .comments-textarea:-ms-input-placeholder {
+    color: #646464;
+    font-weight: 300;
+}
+input::placeholder {
+    color: #646464;
+    font-weight: 300;
+}
+input:-ms-input-placeholder {
     color: #646464;
     font-weight: 300;
 }
@@ -170,6 +196,14 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
+    justify-content: space-between;
+    width: 70%;
+}
+.comment-head_edit {
+    color: #8DCAFF;
+}
+.comment-head_delete {
+    color: #EC4C4C;
 }
 .comment-user-pic {
     border-radius: 50%;
@@ -349,6 +383,40 @@ input:not([type="checkbox"]).is-invalid {
     background-color: #fff;
     border-color: #dee2e6;
 }
+.mini-modal .comments-textarea {
+    width: 100%;
+}
+.comment-head-left {
+    display: flex;
+}
+.comment-head-right {
+    display: flex;
+    flex-direction: column;
+}
+.two-btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+}
+.two-btn-wrapper input[type='submit'] {
+    margin: 0 3rem;
+}
+.modal-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.modal-form-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+label + input:not([type='submit']),
+label + input:not([type='checkbox']),
+label + .comments-textarea {
+    margin-top: 1rem;
+}
+
 
 
 

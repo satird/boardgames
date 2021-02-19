@@ -1,5 +1,9 @@
 package ru.satird.boardgame.domain;
 
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,13 +13,15 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String text;
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "bgg_id")
     private Boardgame boardgame;
-    @Column(updatable = false)
+    @Column(updatable = true)
     private Date creationDate;
 
     public Comment() {

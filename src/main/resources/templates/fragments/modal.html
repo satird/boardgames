@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<div class="" th:fragment="modal">
+    <div class="overlay"></div>
+    <div id="editModal" th:if="${boardgame != null}" class="modal mini-modal">
+        <a class="close-modal" href="javascript:void(0);"></a>
+        <div class="modal-wrapper">
+            <form th:method="post" th:action="@{/boardgames/{boardgame}/update(boardgame = ${boardgame.getBggId()})}">
+                <textarea class="comments-textarea" id="editComment" name="editComment" cols="30" rows="10"
+                          th:placeholder="${comment != null} ? ${comment.getText()} : #{comments.entermessage}" required></textarea>
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}"/>
+                <input name="commentId" th:class="'commentId'" type="hidden">
+                <button th:text="#{comments.add}" type="submit">Добавить</button>
+            </form>
+        </div>
+    </div>
+    <div id="deleteModal" th:if="${boardgame != null}" class="modal mini-modal">
+        <a class="close-modal" href="javascript:void(0);"></a>
+        <div class="modal-wrapper">
+            <form th:method="post" th:action="@{/boardgames/{boardgame}/delete(boardgame = ${boardgame.getBggId()})}">
+                <p th:class="'modal-title'">Вы дуйствительно хотите удалить свой комментарий?</p>
+                <div th:class="'two-btn-wrapper'">
+                    <input th:class="'red-btn is-invalid btn-close-modal'" name="deleteComment" type="submit" th:value="Yes">
+                    <input th:class="'blue-btn btn-close-modal'" name="leaveComment" type="button" th:value="No">
+                </div>
+                <input name="commentId" th:class="'commentId'" type="hidden">
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}"/>
+            </form>
+        </div>
+    </div>
+    <div id="sendMessageModal" class="modal mini-modal">
+        <a class="close-modal" href="javascript:void(0);"></a>
+        <div class="modal-wrapper">
+            <form th:method="post" th:action="@{/sendMessage}">
+                <div th:class="'modal-form-wrapper'">
+                    <label for="sendName">Имя:</label>
+                    <input id="sendName" th:class="'modal-input'" name="sendName" type="text" placeholder="Введите имя">
+                    <label for="sendEmail">Email:</label>
+                    <input id="sendEmail" th:class="'modal-input'" name="sendEmail" type="email" placeholder="Введите email">
+                    <label for="sendMessage">Сообщение:</label>
+                    <textarea class="comments-textarea" id="sendMessage" name="sendMessage" cols="30" rows="10"
+                              th:placeholder="'Введите Ваше сообщение'" required></textarea>
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}"/>
+                    <button type="submit">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

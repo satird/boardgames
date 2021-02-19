@@ -9,6 +9,8 @@ import ru.satird.boardgame.domain.User;
 public interface BoardgameRepository extends PagingAndSortingRepository<Boardgame, Long> {
     Page<Boardgame> findByPrimaryNameIgnoreCaseContaining(String gameName, Pageable pageable);
 
+    Page<Boardgame> findByAlternateIgnoreCaseContaining(String gameName, Pageable pageable);
+
     Page<Boardgame> findAll(Pageable pageable);
 
     Boardgame findByBggId(Long id);

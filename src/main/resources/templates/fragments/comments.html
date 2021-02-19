@@ -3,8 +3,10 @@
 
 <div class="comments" th:fragment="comments">
     <p th:text="#{comments.sendmessage}" class="comments-title">Отправить сообщение</p>
-    <form action="" method="post">
-        <textarea class="comments-textarea" name="comment" id="comment" cols="30" rows="10" th:placeholder="#{comments.entermessage}"></textarea>
+    <p th:text="${test}"></p>
+    <form th:method="post" th:action="@{/boardgames/{boardgame}/create(boardgame = ${boardgame.getBggId()})}">
+<!--        <textarea class="comments-textarea" name="comment" id="comment" cols="30" rows="10" th:placeholder="#{comments.entermessage}" th:text="${comment != null} ? ${comment.getText()}"></textarea>-->
+        <textarea class="comments-textarea" name="newComment" id="comment" cols="30" rows="10" th:placeholder="${comment != null} ? ${comment} : #{comments.entermessage}"></textarea>
         <input type="hidden"
                th:name="${_csrf.parameterName}"
                th:value="${_csrf.token}"/>
@@ -12,19 +14,28 @@
     </form>
     <div class="comments-wrapper">
         <p th:text="#{comments.comments}" class="comments-title">Комментарии</p>
-        <div th:each="commentMessage : ${commentMessages}" class="comment-block">
-            <div class="comment-head">
-                <div class="comment-user-pic">
-<!--                    <img th:src="@{/resources/images/user.png}" alt="user-icon">-->
-                    <img th:if="${commentMessage.getAuthor().getUserpic()}" th:src="${commentMessage.getAuthor().getUserpic()}" alt="user-icon">
+        <div th:each="commentMessage : ${commentMessages}">
+            <div class="comment-block">
+                <div class="comment-head">
+                    <div th:class="comment-head-left">
+                        <div class="comment-user-pic">
+                            <!--                    <img th:src="@{/resources/images/user.png}" alt="user-icon">-->
+                            <img th:if="${commentMessage.getAuthor().getUserpic()}" th:src="${commentMessage.getAuthor().getUserpic()}" alt="user-icon">
+                        </div>
+                        <div>
+                            <p th:text="${commentMessage.getAuthor().getUsername()}" class="comment-user-name">Имя пользователя</p>
+                            <span th:text="${#dates.format(commentMessage.getCreationDate(), 'dd MMMM yyyy HH:mm')}" class="comment-time">Дата отправки</span>
+                        </div>
+                    </div>
+                    <div th:if="${commentMessage.getAuthor().getUsername() == #request.userPrincipal.name}" th:class="comment-head-right">
+                        <a th:class="'comment-head_edit open-modal'" th:href="'#editModal'">Изменить</a>
+                        <a th:class="'comment-head_delete open-modal'" th:href="'#deleteModal'">Удалить</a>
+                        <input th:class="'idComment'"  type="hidden" th:value="${commentMessage.getId()}">
+                    </div>
                 </div>
-                <div>
-                    <p th:text="${commentMessage.getAuthor().getUsername()}" class="comment-user-name">Имя пользователя</p>
-                    <span th:text="${#dates.format(commentMessage.getCreationDate(), 'dd MMMM yyyy HH:mm')}" class="comment-time">Дата отправки</span>
+                <div class="comment-body">
+                    <p th:text="${commentMessage.getText()}">Комментарий</p>
                 </div>
-            </div>
-            <div class="comment-body">
-                <p th:text="${commentMessage.getText()}">Комментарий</p>
             </div>
         </div>
     </div>

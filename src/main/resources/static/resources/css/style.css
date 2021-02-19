@@ -72,16 +72,16 @@ input[type=search]{
     margin: 0 auto;
     position: relative;
 }
-.red-btn {
-    height: 6rem;
-    background-color: #ee7474;
-    color: #fff;
-    border-radius: 0.3rem;
-    font-size: 2.4rem;
-    transition: 0.2s;
-    display: inline-block;
-    line-height: 6rem;
-}
+/*.red-btn {*/
+/*    height: 6rem;*/
+/*    background-color: #ee7474;*/
+/*    color: #fff;*/
+/*    border-radius: 0.3rem;*/
+/*    font-size: 2.4rem;*/
+/*    transition: 0.2s;*/
+/*    display: inline-block;*/
+/*    line-height: 6rem;*/
+/*}*/
 main {
     font-size: 1.6rem;
 }
@@ -207,17 +207,18 @@ section {
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 50;
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 90%;
     display: none;
-    background-color: #b7eced;
-    padding: 10rem 0 11rem;
+    background-color: #f6f6f6;
+    padding: 6rem 6rem 2rem;
     overflow: auto;
     transition: 0.3s;
 }
 .mini-modal.modal {
     width: 70rem;
-    height: 30rem;
+    height: initial;
+    max-height: 90%;
     max-width: 90%;
     border-radius: 0.4rem;
 }
@@ -230,8 +231,8 @@ section {
     top: 0;
     width: 5.4rem;
     height: 5.4rem;
-    background-color: #fff;
-    border: 1px solid #0098bd;
+    /*background-color: #fff;*/
+    /*border: 1px solid #EC4C4C;*/
     border-radius: 50%;
     z-index: 51;
     transition: 0.6s;
@@ -240,11 +241,11 @@ section {
 .close-modal::after {
     content: '';
     position: absolute;
-    width: 1px;
+    width: 2px;
     height: 4rem;
     top: 50%;
     left: 50%;
-    background-color: #0098bd;
+    background-color: #EC4C4C;
 }
 .close-modal::before {
     transform: translate(-50%, -50%) rotate(45deg);
@@ -399,13 +400,13 @@ section {
         font-size: 3rem;
         padding: 2rem 0;
     }
-    .red-btn {
-        height: 9rem;
-        border-radius: 0.6rem;
-        font-size: 3rem;
-        line-height: 9rem;
-        padding: 0 4.5rem;
-    }
+    /*.red-btn {*/
+    /*    height: 9rem;*/
+    /*    border-radius: 0.6rem;*/
+    /*    font-size: 3rem;*/
+    /*    line-height: 9rem;*/
+    /*    padding: 0 4.5rem;*/
+    /*}*/
     .header-btn {
         padding: 0 4.5rem;
     }

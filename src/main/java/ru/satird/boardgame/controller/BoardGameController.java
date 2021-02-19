@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponents;
@@ -24,6 +25,7 @@ import java.util.*;
 
 
 @Controller
+@RequestMapping(value = "boardgames")
 public class BoardGameController {
 
     @Autowired
@@ -49,7 +51,7 @@ public class BoardGameController {
         }
     }
 
-    @GetMapping("/boardgames")
+    @GetMapping()
     public String main(
             @RequestParam(required = false, defaultValue = "") String gameName,
             @PageableDefault(sort = {"bggId"}, direction = Sort.Direction.ASC, value = 100) Pageable pageable,
@@ -61,7 +63,7 @@ public class BoardGameController {
         String url = "/boardgames?";
 
         if (gameName != null && !gameName.isEmpty()) {
-            page = boardgameService.findByPrimaryNameIgnoreCaseContaining(gameName, pageable);
+            page = boardgameService.findByAlternateIgnoreCaseContaining(gameName, pageable);
             url = "/boardgames?gameName=" + gameName + "&";
         } else {
             page = boardgameService.findAll(pageable);
@@ -73,18 +75,17 @@ public class BoardGameController {
         Pageable goToNumPage;
         if (goToPage != null && !goToPage.isEmpty()) {
             if (pageSize != null) {
-                goToNumPage = PageRequest.of(Integer.parseInt(goToPage)-1, pageSize, Sort.by("bggId").ascending());
+                goToNumPage = PageRequest.of(Integer.parseInt(goToPage) - 1, pageSize, Sort.by("bggId").ascending());
             } else {
-                goToNumPage = PageRequest.of(Integer.parseInt(goToPage)-1, page.getSize(), Sort.by("bggId").ascending());
+                goToNumPage = PageRequest.of(Integer.parseInt(goToPage) - 1, page.getSize(), Sort.by("bggId").ascending());
             }
             if (gameName != null && !gameName.isEmpty()) {
                 url = "/boardgames?gameName=" + gameName + "&";
-                page = boardgameService.findByPrimaryNameIgnoreCaseContaining(gameName, goToNumPage);
+                page = boardgameService.findByAlternateIgnoreCaseContaining(gameName, goToNumPage);
             } else {
                 page = boardgameService.findAll(goToNumPage);
             }
         }
-
         int[] body = ControllerUtils.pagination(page);
         model.addAttribute("body", body);
         model.addAttribute("page", page);
@@ -94,9 +95,10 @@ public class BoardGameController {
         return "boardgames";
     }
 
-    @GetMapping("/boardgames/{id}")
+    @GetMapping("{id}")
     public String detailBg(
             @PathVariable Long id,
+            @RequestParam(required = false) Long comment,
             Model model
     ) {
         Boardgame detailGame = boardgameService.findByBggId(id);
@@ -107,60 +109,53 @@ public class BoardGameController {
         } else {
             isFavorites = false;
         }
+        model.addAttribute("comment", commentService.findById(comment));
         model.addAttribute("isFavorites", isFavorites);
         model.addAttribute("commentMessages", gameComments);
         model.addAttribute("boardgame", boardgameService.findByBggId(id));
         return "bgDetail";
     }
 
-    @PostMapping("/boardgames/{boardgame}")
+    @PostMapping("{boardgame}/create")
     public String addComment(
             @PathVariable Boardgame boardgame,
-            @RequestParam(required = false) String comment,
+            @RequestParam("newComment") String newComment,
             Model model
     ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(authentication.getName());
-        
         Date dateTime = new Date();
-        Comment commentMessage = new Comment(comment, user, boardgame, dateTime);
+        Comment commentMessage = new Comment();
+        commentMessage.setText(newComment);
+        commentMessage.setAuthor(user);
+        commentMessage.setBoardgame(boardgame);
+        commentMessage.setCreationDate(dateTime);
         commentService.save(commentMessage);
 
-        Iterable<Comment> comments = commentService.findAllByBoardgame(boardgame);
-        model.addAttribute("commentMessages", comments);
         return "redirect:/boardgames/" + boardgame.getBggId();
     }
 
-    @GetMapping("/favorites/{boardgame}/bookmark")
-    public String addFavorites(
+    @PostMapping("{boardgame}/update")
+    public String updateComment(
             @PathVariable Boardgame boardgame,
-            RedirectAttributes redirectAttributes,
-            @RequestHeader(required = false) String referer
+            @RequestParam() Long commentId,
+            @RequestParam("editComment") String newComment
     ) {
-        Set<User> favorites = boardgame.getFavorites();
-        if (favorites.contains(userInfo())) {
-            favorites.remove(userInfo());
-        } else {
-            favorites.add(userInfo());
-        }
-        boardgameService.save(boardgame);
-        UriComponents components = UriComponentsBuilder.fromHttpUrl(referer).build();
-
-        components.getQueryParams()
-                .entrySet()
-                .forEach(pair -> redirectAttributes.addAttribute(pair.getKey(), pair.getValue()));
-        return "redirect:" + components.getPath();
+        Date dateTime = new Date();
+        Comment comment = commentService.findById(commentId);
+        comment.setText(newComment);
+        comment.setCreationDate(dateTime);
+        commentService.save(comment);
+        return "redirect:/boardgames/" + boardgame.getBggId();
     }
 
-    @GetMapping("/favorites")
-    public String favorites(
-            Model model
+    @PostMapping("{boardgame}/delete")
+    public String deleteComment(
+            @PathVariable Boardgame boardgame,
+            @RequestParam() Long commentId
     ) {
-        Iterable<Boardgame> boardgames;
-
-        boardgames = boardgameService.findByFavorites(userInfo());
-        model.addAttribute("boardgames", boardgames);
-
-        return "favorites";
+        commentService.delete(commentId);
+        return "redirect:/boardgames/" + boardgame.getBggId();
     }
+
 }
