@@ -7,5 +7,5 @@
 
 Короче все как на любых подобных сайтах. А здесь я пишу всё это, так как не придумал, что ещё можно запостить на главной)
 Ссылка на AWS, где можно протестировать [ТЫК](http://ec2-35-180-40-4.eu-west-3.compute.amazonaws.com/)
-## Работа для резюме
+## Мой pet-проект
 ![](https://github.com/satird/mediaContainer/blob/main/src/main/resources/static/resources/images/Peek-boardgame.gif)
